@@ -43,14 +43,14 @@ await axios.get(`${BASE_URL}/categories`)
 
 export const data= {
 	'No.': {
-		values: datas.map(category => category.id),
+		values: datas?.map(category => category.id),
 		classNames: (value) =>
 			value === "Jane Smith" || value === "Emma Martinez"
 				? "text-green-400 font-medium"
 				: "text-white",
 	},
 	'Nama': {
-		values: datas.map(category => category.name),
+		values: datas?.map(category => category.name),
 		renderValue: (value) => {
 					return (
 						// <div className='font-medium'>
@@ -60,7 +60,7 @@ export const data= {
 				}
 	},
 	Parent: {
-		values: datas.map(category => category.parent_category_name),
+		values: datas?.map(category => category.parent_category_name),
 		classNames: (value) =>
 			typeof value === "string" && value.includes("john")
 				? "text-green-400 font-medium"

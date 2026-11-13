@@ -17,6 +17,9 @@ import {
   GroupIcon
 } from "../icons";
 import { FaBasketShopping } from "react-icons/fa6";
+import { MdOutlineCategory } from "react-icons/md"
+import { AiOutlineProduct} from "react-icons/ai"
+import { LuWalletMinimal} from "react-icons/lu"
 import { useSidebar } from "../context/SidebarContext";
 import SidebarWidget from "./SidebarWidget";
 
@@ -31,15 +34,16 @@ const navItems: NavItem[] = [
   {
     icon: <GridIcon />,
     name: "Dashboard",
-    subItems: [{ name: "Ecommerce", path: "/", pro: false }],
+    path: "/"
+    // subItems: [{ name: "Ecommerce", path: "/", pro: false }],
   },
   {
-    icon: <BoxCubeIcon />,
+    icon: <AiOutlineProduct />,
     name: "Produk",
     path: "/products",
   },
   {
-    icon: <UserCircleIcon />,
+    icon: <MdOutlineCategory />,
     name: "Kategori",
     path: "/categories",
   },
@@ -52,6 +56,11 @@ const navItems: NavItem[] = [
     icon: <GroupIcon />,
     name: "Pelanggan",
     path: "/customers",
+  },
+  {
+    icon: <LuWalletMinimal />,
+    name: "Keuangan",
+    path: "/balances",
   },
   {
     icon: <UserCircleIcon />,

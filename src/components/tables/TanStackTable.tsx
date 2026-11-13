@@ -58,6 +58,9 @@ const TanStackTable = ({uri1}) => {
     if(uri1 == 'customers'){
       getCustomerColumns()
     }
+    if(uri1 == 'balances'){
+      getBalanceColumns()
+    }
     if(uri1 == 'order-reports'){
       getOrderReportColumns()
     }
@@ -163,12 +166,12 @@ const TanStackTable = ({uri1}) => {
         {
           accessorKey: "total_price",
           header: "Total Harga",
-          cell: (info) => <span>{info.getValue() as string || '-' as string}</span>,
+          cell: (info) => <span>{formatCurrency(info.getValue(), 'IDR') as string || '-' as string}</span>,
         },
         {
           accessorKey: "order_status",
           header: "Status Pesanan",
-          cell: (info) => <span className={`border ${info.getValue() as string == 'success'? 'bg-green-400' : info.getValue() as string == 'pending'? 'bg-yellow-400' : 'bg-rose-400'} rounded-4xl `}>{info.getValue() as string}</span>,
+          cell: (info) => <span className={`border ${info.getValue() as string == 'success'? 'bg-green-400' : info.getValue() as string == 'pending'? 'bg-yellow-400' : 'bg-rose-400'} rounded-4xl px-2 py-3`}>{info.getValue()?.toUpperCase() as string}</span>,
           // cell: (info) => <span>{info.getValue() as string || '-' as string}</span>,
         },
         {
@@ -265,6 +268,90 @@ const TanStackTable = ({uri1}) => {
           cell: (info) => <>
               <button type='button' className="flex items-center justify-center w-full px-4 py-3 mb-2 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600"
                     onClick={() => navigate('/customers/' + info.getValue() as string)}
+                  >
+                    Detail
+              </button>
+              <button type='button' className="flex items-center justify-center w-full px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600"
+                    onClick={() => deleteItem(info.getValue() as string)}
+                  >
+                    Hapus
+              </button>
+          </>,
+        },
+        // {
+        //   accessorKey: "originalPrice",
+        //   header: "Original Price",
+        //   cell: (info) => <span>{formatCurrency(info.getValue() || 0, 'IDR') as string}</span>,
+        // },
+        // {
+        //   accessorKey: "discount",
+        //   header: "Discount",
+        //   cell: (info) => <span>{info.getValue() as number || 0 as number}</span>,
+        // },
+        // {
+        //   accessorKey: "bgColor",
+        //   header: "Background Color",
+        //   cell: (info) => <span>{info.getValue() as string || '-' as string}</span>,
+        // }
+      ]
+
+    )
+
+  }
+  const getBalanceColumns = () => {
+
+    setColumns(
+      [
+        {
+          id: "withdraw_number",
+          header: "Nomor Penarikan",
+          cell: (info) => <span>{info.getValue() as string}</span>,
+        },
+        {
+          accessorKey: "last_balance",
+          header: "Saldo Terakhir",
+          cell: (info) => <span>{info.getValue() as string}</span>,
+          // <Link to={`/customers/${info.getValue('id') as string}`}>{info.getValue('id') as string}</Link>
+        },
+        {
+          accessorKey: "last_debit",
+          header: "Debit Terakhir",
+          cell: (info) => <span>{info.getValue() as string}</span>,
+          // <Link to={`/customers/${info.getValue('id') as string}`}>{info.getValue('id') as string}</Link>
+        },
+        {
+          accessorKey: "admin_fee",
+          header: "Biaya Admin",
+          cell: (info) => <span>{info.getValue() as string}</span>,
+          // <Link to={`/customers/${info.getValue('id') as string}`}>{info.getValue('id') as string}</Link>
+        },
+        {
+          accessorKey: "total_debit",
+          header: "Tota Debit",
+          cell: (info) => <span>{info.getValue() as string}</span>,
+          // <Link to={`/customers/${info.getValue('id') as string}`}>{info.getValue('id') as string}</Link>
+        },
+        {
+          accessorKey: "withdraw_form",
+          header: "Formulir Penarikan",
+          cell: (info) => <span>{info.getValue() as string}</span>,
+        },
+        {
+          accessorKey: "transfer_eviden",
+          header: "Bukti Transfer",
+          cell: (info) => <span>{info.getValue() as string || '-' as string}</span>,
+        },
+        {
+          accessorKey: "is_complete",
+          header: "Status Penarikan",
+          cell: (info) => <span className={`border ${info.getValue() as string == 'success'? 'bg-green-400' : info.getValue() as string == 'pending'? 'bg-yellow-400' : 'bg-rose-400'} rounded-4xl `}>{info.getValue() as string}</span>,
+        },
+        {
+          accessorKey: "id",
+          header: "Aksi",
+          cell: (info) => <>
+              <button type='button' className="flex items-center justify-center w-full px-4 py-3 mb-2 text-sm font-medium text-white transition rounded-lg bg-brand-500 shadow-theme-xs hover:bg-brand-600"
+                    onClick={() => navigate('/balances/' + info.getValue() as string)}
                   >
                     Detail
               </button>

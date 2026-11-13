@@ -40,6 +40,7 @@ export default function ProductCreate() {
     price: 0,
     original_price: 0,
     discount: 0,
+    pin_product: "",
     bg_color: "#ffffff",
     panel_color: "#f3f4f6",
     text_color: "#000000",
@@ -52,6 +53,7 @@ export default function ProductCreate() {
 
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
+  const [selectedCategoryOptions, setSelectedPinCategory] = useState([]);
 
   // Options
   const categoryOptions = [
@@ -83,6 +85,12 @@ export default function ProductCreate() {
     { value: "xl", label: "XL" },
     { value: "xxl", label: "XXL" },
     { value: "all_size", label: "All Size" },
+  ];
+
+  const pinCategoryOptions = [
+    { value: "newarrivals", label: "New Arrival" },
+    { value: "special-offer", label: "Special Offer" },
+    { value: "bestseller", label: "Best Seller" }
   ];
 
   useEffect(() => {
@@ -153,7 +161,7 @@ export default function ProductCreate() {
       const newColors = prev.includes(colorValue)
         ? prev.filter(c => c !== colorValue)
         : [...prev, colorValue];
-      setProduct(prevProduct => ({ ...prevProduct, colors: newColors }));
+      setProduct(prevProduct => ({ ...prevProduct, colors: Array.isArray(prevProduct.colors)?prevProduct.colors.push(newColors): [] }));
       return newColors;
     });
   };
@@ -165,6 +173,16 @@ export default function ProductCreate() {
         : [...prev, sizeValue];
       setProduct(prevProduct => ({ ...prevProduct, sizes: newSizes }));
       return newSizes;
+    });
+  };
+
+  const handlePinCategoryToggle = (pinCategoryValue) => {
+    setSelectedPinCategory(prev => {
+      const newPinCategory = prev.includes(pinCategoryValue)
+        ? prev.filter(s => s !== pinCategoryValue)
+        : [...prev, pinCategoryValue];
+      setProduct(prevProduct => ({ ...prevProduct, sizes: newPinCategory }));
+      return newPinCategory;
     });
   };
 
@@ -328,6 +346,7 @@ export default function ProductCreate() {
       formData.append('original_price', product.original_price.toString());
       formData.append('discount', product.discount.toString());
       formData.append('price', product.price.toString());
+      formData.append('pin_product', product.pin_product.toString());
       formData.append('bg_color', product.bg_color);
       formData.append('panel_color', product.panel_color);
       formData.append('text_color', product.text_color);
@@ -657,7 +676,7 @@ export default function ProductCreate() {
           </div>
           {selectedColors.length > 0 && (
             <p className="text-sm text-gray-500 mt-2">
-              Selected: {selectedColors.map(c => colorOptions.find(o => o.value === c)?.label).join(', ')}
+              Selected: {selectedColors.map(c => colorOptions.find(o => o.hex === c)?.label).join(', ')}
             </p>
           )}
         </div>
@@ -779,6 +798,42 @@ export default function ProductCreate() {
             )}
           </div>
         )}
+
+        {/* Pin Product */}
+        <div>
+          <Label>Tanda Produk Sebagai</Label>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {pinCategoryOptions.map((pinCategory) => (
+              <>
+              <input
+                // key={pinCategory.value}
+                type="radio"
+                name="pin_category"
+                onClick={() => handlePinCategoryToggle(pinCategory.value)}
+                className={`px-3 py-2 rounded-lg border transition-colors ${
+                  selectedCategoryOptions.includes(pinCategory.value)
+                    ? 'border-yellow-500 bg-yellow-50 dark:bg-blue-900/20 text-yellow-700'
+                    : 'border-gray-300 hover:border-gray-400 dark:border-gray-600 text-gray-700'
+                }`}
+              />
+              {/* <Input
+                type="radio"
+                id="pin_product"
+                name="pin_product"
+                value={product.pin_product || ''}
+                onChange={() => handlePinCategoryToggle(pinCategory.value)}
+                className={`px-3 py-2 rounded-lg border transition-colors ${
+                  selectedCategoryOptions.includes(pinCategory.value)
+                    ? 'border-yellow-500 bg-yellow-50 dark:bg-blue-900/20 text-yellow-700'
+                    : 'border-gray-300 hover:border-gray-400 dark:border-gray-600 text-gray-700'
+                }`}
+                placeholder="0"
+              /> */}
+                <span className="text-sm font-medium">{pinCategory.label}</span>
+              </>
+            ))}
+          </div>
+        </div>
 
         {/* Color Customization */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

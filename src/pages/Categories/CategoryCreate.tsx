@@ -237,7 +237,7 @@ export default function CategoryCreate() {
       // xhr.open('POST', '/api/categoriess', true);
       // xhr.send(formData);
 
-      const response = await axios.post(`${BASE_URL}/categories`, categories);
+      const response = await axios.post(`${BASE_URL}/categories`, categories, {withCredentials: true});
 
         console.log(response)
 

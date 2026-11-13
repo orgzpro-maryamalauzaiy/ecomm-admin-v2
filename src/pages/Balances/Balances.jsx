@@ -7,11 +7,11 @@ import { useState, useEffect } from "react";
 // import Datatable from "../../components/Tables/Datatables.js"
 // import NewDataTable from "../../components/Tables/NewDatatables";
 import TanStackTable from "../../components/tables/TanStackTable.js"
-import { data } from "../../utils/categories.jsx";
+import { data } from "../../utils/balances.jsx";
 // import { toast } from "react-toastify";
 // import supabase from "configs/supabase.js";
 
-const Categories = () => {
+const Balances = () => {
   const [datas, setDatas] = useState([])
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
@@ -20,7 +20,7 @@ const Categories = () => {
     if(data){
       setDatas(data)
     }
-    console.log('categories', data, datas)
+    console.log('Balances', data, datas)
 
   },[data])
   return (
@@ -34,7 +34,7 @@ const Categories = () => {
         </div> */}
         {/* FROM PRO */}
         {/* <div className="w-full mb-12 px-4"> */}
-          <TanStackTable uri1="categories"/>
+          <TanStackTable uri1="balances"/>
           {/* <NewDataTable
             data={datas}
             searchBar
@@ -49,4 +49,4 @@ const Categories = () => {
   );
 }
 
-export default Categories
+export default Balances

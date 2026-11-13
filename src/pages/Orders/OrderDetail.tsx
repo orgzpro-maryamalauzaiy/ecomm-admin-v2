@@ -296,7 +296,7 @@ const OrderDetail: React.FC<OrderDetailPageProps> = ({ mode = 'view' }) => {
             <p className="text-sm text-gray-500 dark:text-gray-400">Status Pembayaran</p>
             <div className="flex items-center justify-between mt-1">
               <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(order.payment_status, 'payment')}`}>
-                {order.payment_status?.toUpperCase()}
+                {order.payment_status?.toUpperCase() || 'PENDING'}
               </span>
             </div>
           </div>
@@ -342,15 +342,15 @@ const OrderDetail: React.FC<OrderDetailPageProps> = ({ mode = 'view' }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Customer Name</p>
-                  <p className="text-gray-800 dark:text-white font-medium">{order.customer_name}</p>
+                  <p className="text-gray-800 dark:text-white font-medium">{order.customer_name || '-'}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Email</p>
-                  <p className="text-gray-800 dark:text-white">{order.customer_email}</p>
+                  <p className="text-gray-800 dark:text-white">{order.customer_email || '-'}</p>
                 </div>
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Phone Number</p>
-                  <p className="text-gray-800 dark:text-white">{order.customer_phone}</p>
+                  <p className="text-gray-800 dark:text-white">{order.customer_phone || '-'}</p>
                 </div>
               </div>
             </div>

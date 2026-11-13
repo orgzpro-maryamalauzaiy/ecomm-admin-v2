@@ -74,7 +74,7 @@ export const data= {
 		values: datas && datas.map(orders => '/' +orders.order_status),
 		classNames: (value) =>
 			typeof value === "string" && value.includes("john")
-				? "text-green-400 font-medium"
+				? "text-green-400 font-medium px-2 py-3"
 				: "text-white",
 	},
 	// ToggleEventhumbnail: {

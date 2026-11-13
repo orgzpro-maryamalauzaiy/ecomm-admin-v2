@@ -9,26 +9,26 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_SERVER_MODE === 'development' ? import.meta.env.VITE_DEV_URL : import.meta.env.VITE_PROD_URL
 
-export default function CategoryInfoCard({id}) {
+export default function BalanceInfoCard({id}) {
   const { isOpen, openModal, closeModal } = useModal();
-  const [category, setcategory] = useState({
+  const [balance, setBalance] = useState({
       name: "",
       parent_id: ""
     })
 
   useEffect(() => {
-    if(!category){
-      getCategory()
+    if(!balance){
+      getBalance()
     }
-  }, [id, category])
+  }, [id, balance])
 
-  const getCategory = async () => {
+  const getBalance = async () => {
     try {
-      await axios.get(`${BASE_URL}/categories/${id}`, {withCredentials: true})
+      await axios.get(`${BASE_URL}/balances/${id}`, {withCredentials: true})
                   .then(result => {
                     console.log('result', result)
                     if(result.status === 200){
-                      setcategory({
+                      setBalance({
                         name: result.data.data.name,
                         parent_id: result.data.data.parent_id,
                       })
@@ -36,7 +36,7 @@ export default function CategoryInfoCard({id}) {
                   })
 
     } catch (error) {
-      toast.error('Error!, Get categories error: ' + error)
+      toast.error('Error!, Get balance error: ' + error)
     }
   }
 
@@ -44,11 +44,11 @@ export default function CategoryInfoCard({id}) {
     // Handle save logic here
     console.log("Saving changes...");
     try {
-      await axios.patch(`${BASE_URL}/categories/${id}`, category, {withCredentials: true})
+      await axios.patch(`${BASE_URL}/balances/${id}`, balance, {withCredentials: true})
                   .then(result => {
                     console.log(result)
                     if(result.status === 200){
-                      setcategory({
+                      setBalance({
                         name: result.data.data.name,
                         parent_id: result.data.data.parent_id
                       })
@@ -56,7 +56,7 @@ export default function CategoryInfoCard({id}) {
                   })
 
     } catch (error) {
-      toast.error('Error!, Error save categories.')
+      toast.error('Error!, Error save balances.' + error)
     }
     closeModal();
   };
@@ -74,7 +74,7 @@ export default function CategoryInfoCard({id}) {
                 First Name
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                {category.full_name}
+                {Balance.full_name}
               </p>
             </div> */}
 
@@ -92,7 +92,7 @@ export default function CategoryInfoCard({id}) {
                 Name
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                {category.name}
+                {balance.name}
               </p>
             </div>
 
@@ -101,7 +101,7 @@ export default function CategoryInfoCard({id}) {
                 Phone
               </p>
               <p className="text-sm font-medium text-gray-800 dark:text-white/90">
-                {category.phone_number}
+                {Balance.phone_number}
               </p>
             </div> */}
 
@@ -143,10 +143,10 @@ export default function CategoryInfoCard({id}) {
         <div className="no-scrollbar relative w-full max-w-[700px] overflow-y-auto rounded-3xl bg-white p-4 dark:bg-gray-900 lg:p-11">
           <div className="px-2 pr-14">
             <h4 className="mb-2 text-2xl font-semibold text-gray-800 dark:text-white/90">
-              Edit Category
+              Edit Balance
             </h4>
             <p className="mb-6 text-sm text-gray-500 dark:text-gray-400 lg:mb-7">
-              Update your details to keep your categories up-to-date.
+              Update your details to keep your balances up-to-date.
             </p>
           </div>
           <form className="flex flex-col">
@@ -192,7 +192,7 @@ export default function CategoryInfoCard({id}) {
                 <div className="grid grid-cols-1 gap-x-6 gap-y-5 lg:grid-cols-2">
                   {/* <div className="col-span-2 lg:col-span-1">
                     <Label>First Name</Label>
-                    <Input type="text" value={category.full_name} onChange={(e) => setcategory({...category, full_name: e.target.value})} />
+                    <Input type="text" value={Balance.full_name} onChange={(e) => setBalance({...Balance, full_name: e.target.value})} />
                   </div> */}
 
                   {/* <div className="col-span-2 lg:col-span-1">
@@ -202,12 +202,12 @@ export default function CategoryInfoCard({id}) {
 
                   <div className="col-span-2 lg:col-span-1">
                     <Label>Nama</Label>
-                    <Input type="text" value={category.name} onChange={(e) => setcategory({...category, name: e.target.value})} />
+                    <Input type="text" value={balance.name} onChange={(e) => setBalance({...Balance, name: e.target.value})} />
                   </div>
 
                   {/* <div className="col-span-2 lg:col-span-1">
                     <Label>Phone</Label>
-                    <Input type="text" value={category.phone_number} onChange={(e) => setcategory({...category, phone_number: e.target.value})} />
+                    <Input type="text" value={Balance.phone_number} onChange={(e) => setBalance({...Balance, phone_number: e.target.value})} />
                   </div> */}
 
                   {/* <div className="col-span-2">

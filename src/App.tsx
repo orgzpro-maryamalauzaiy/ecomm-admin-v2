@@ -25,6 +25,7 @@ import Products from "./pages/Products/Products"
 import Categories from "./pages/Categories/Categories"
 import Orders from "./pages/Orders/Orders"
 import Customers from "./pages/Customers/Customers"
+import Balances from "./pages/Balances/Balances"
 import ProductCreate from "./pages/Products/ProductCreate";
 import ProductDetail from "./pages/Products/ProductDetail";
 import CustomerCreate from "./pages/Categories/CategoryCreate";
@@ -32,6 +33,7 @@ import CategoryCreate from "./pages/Categories/CategoryCreate";
 import ProtectedRoute from "./layout/ProtectedRoute";
 import CustomerDetail from "./pages/Customers/CustomerDetail";
 import CategoryDetail from "./pages/Categories/CategoryDetail";
+import BalanceDetail from "./pages/Balances/BalanceDetail";
 import OrderReports from "./pages/OrderReports/OrderReports"
 import Cookies from "js-cookie";
 import {useAuth} from './providers/AuthProvider'
@@ -160,6 +162,8 @@ export default function App() {
               <Route path="/orders/:id" element={<OrderDetail user={userInfo}/>} />
               <Route path="/customers" element={<Customers user={userInfo}/>} />
               <Route path="/customers/:id" element={<CustomerDetail user={userInfo}/>} />
+              <Route path="/balances" element={<Balances user={userInfo}/>} />
+              <Route path="/balances/:id" element={<BalanceDetail user={userInfo}/>} />
               <Route path="/order-reports" element={<OrderReports user={userInfo}/>} />
 
               {/* Ui Elements */}

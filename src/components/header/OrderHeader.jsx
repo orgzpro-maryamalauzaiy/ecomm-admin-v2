@@ -81,10 +81,11 @@ export default function OrderHeader() {
           <div>
             {/* Card stats */}
             <div className="flex flex-wrap">
-              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+              <div className="w-full lg:w-3/12 xl:w-3/12 px-4">
                 <CardTransStats
-                  statSubtitle="Saldo"
+                  statSubtitle="Total Saldo"
                   statTitle={balance}
+                  type="money"
                   // statArrow="up"
                   // statPercent="3.48"
                   statPercentColor="text-emerald-500"
@@ -93,10 +94,11 @@ export default function OrderHeader() {
                   statIconColor="bg-red-500"
                 />
               </div>
-              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+              <div className="w-full lg:w-3/12 xl:w-3/12 px-4">
                 <CardTransStats
                   statSubtitle="Total Transaksi"
                   statTitle={total_transactions}
+                  type="money"
                   // statArrow="down"
                   // statPercent="3.48"
                   statPercentColor="text-red-500"
@@ -105,7 +107,7 @@ export default function OrderHeader() {
                   statIconColor="bg-orange-500"
                 />
               </div>
-              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+              <div className="w-full lg:w-3/12 xl:w-3/12 px-4">
                 <CardTransStats
                   statSubtitle="Jumlah Transaksi"
                   statTitle={amount_transactions}
