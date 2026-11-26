@@ -12,7 +12,7 @@ const BASE_URL = import.meta.env.VITE_SERVER_MODE === 'development' ? import.met
 
 let datas = []
 
-await axios.get(`${BASE_URL}/balances/flows`, {withCredentials: true})
+await axios.get(`${BASE_URL}/balances/flows`)
 						.then(result => {
 							console.log('result', result)
 							if(result.status === 200){

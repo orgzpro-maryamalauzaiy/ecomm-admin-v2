@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 // import Datatable from "../../components/Tables/Datatables.js"
 // import NewDataTable from "../../components/Tables/NewDatatables";
 import TanStackTable from "../../components/tables/TanStackTable.js"
-import { data } from "../../utils/balances.jsx";
+// import { data } from "../../utils/balances.jsx";
 // import { toast } from "react-toastify";
 // import supabase from "configs/supabase.js";
 
@@ -17,12 +17,12 @@ const Balances = () => {
   const [errorMessage, setErrorMessage] = useState("")
 
   useEffect(() => {
-    if(data){
-      setDatas(data)
-    }
-    console.log('Balances', data, datas)
+    // if(data){
+    //   setDatas(data)
+    // }
+    // console.log('Balances', data, datas)
 
-  },[data])
+  },[])
   return (
     <>
       <div className="flex flex-wrap">
